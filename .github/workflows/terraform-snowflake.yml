@@ -6,9 +6,12 @@ on:
       - master
 
 jobs:
-  snowflake-terraform-demo:
+  job_one:
     name: "Test file"
     runs-on: ubuntu-latest
+    container:
+      volumes:
+        - my_docker_volume:/volume_mount
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,7 +27,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: openpolicyagent/conftest:latest
-          # options: -v ${{ github.workspace }}:/var/www
+          options: -v ${{ github.workspace }}:/volume_mount
           run: |
             pwd
             ls -al
