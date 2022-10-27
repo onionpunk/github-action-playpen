@@ -9,9 +9,15 @@ jobs:
   job_one:
     name: "Test file"
     runs-on: ubuntu-latest
-    # container:
-    #   volumes:
-    #     - my_docker_volume:/volume_mount
+    container:
+      image: node:14.16
+      env:
+        NODE_ENV: development
+      ports:
+        - 80
+      volumes:
+        - my_docker_volume:/volume_mount
+      options: --cpus 1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
