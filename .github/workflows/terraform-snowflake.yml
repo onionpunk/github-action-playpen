@@ -3,7 +3,7 @@ name: "Testing workflows"
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   snowflake-terraform-demo:
