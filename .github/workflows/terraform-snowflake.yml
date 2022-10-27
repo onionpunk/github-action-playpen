@@ -1,0 +1,31 @@
+name: "Testing workflows"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  snowflake-terraform-demo:
+    name: "Test file"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create file
+        id: create
+        run: echo "{}" > ./plan.json
+
+      - name: List file
+        run: ls -al && pwd
+
+      - name: conftest step
+        uses: addnab/docker-run-action@v3
+        with:
+          image: openpolicyagent/conftest:latest
+          # options: -v ${{ github.workspace }}:/var/www
+          run: |
+            pwd
+            ls -al
+            conftest test -o github ./plan.json
