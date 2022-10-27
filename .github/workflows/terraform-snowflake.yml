@@ -9,9 +9,9 @@ jobs:
   job_one:
     name: "Test file"
     runs-on: ubuntu-latest
-    container:
-      volumes:
-        - my_docker_volume:/volume_mount
+    # container:
+    #   volumes:
+    #     - my_docker_volume:/volume_mount
     steps:
       - name: Checkout
         uses: actions/checkout@v2
