@@ -16,7 +16,7 @@ jobs:
       ports:
         - 80
       volumes:
-        - my_docker_volume:/volume_mount
+        - /__w/github-action-playpen/github-action-playpen:/volume_mount/
       options: --cpus 1
     steps:
       - name: Checkout
@@ -37,4 +37,5 @@ jobs:
           run: |
             pwd
             ls -al
+            ls -al /volume_mount
             conftest test -o github ./plan.json
