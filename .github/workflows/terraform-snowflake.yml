@@ -9,14 +9,6 @@ jobs:
   job_one:
     name: "Test file"
     runs-on: ubuntu-latest
-    container:
-      image: node:14.16
-      env:
-        NODE_ENV: development
-      ports:
-        - 80
-      volumes:
-        - /__w/github-action-playpen/github-action-playpen:/volume_mount/
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -28,11 +20,10 @@ jobs:
       - name: List file
         run: ls -al && pwd
 
-      - name: conftest step
+      - name: Run unit tests on plan with Docker
         uses: addnab/docker-run-action@v3
         with:
           image: openpolicyagent/conftest:latest
-          options: -v ${{ github.workspace }}:/volume_mount
+          options: -v ${{ github.workspace }}:/var/www
           run: |
-            cd /volume_mount
-            conftest test -o github ./plan.json
+            ls -al /var/www
